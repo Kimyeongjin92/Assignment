@@ -40,7 +40,6 @@ hiphop_corp2  <- tm_map(hiphop_corp2,removeNumbers)
 hiphop_corp2  <- tm_map(hiphop_corp2,removePunctuation)
 sword2        <- c(stopwords('en'),'and','but','not') # 영어의 관사 대명사 접속사 등 
 hiphop_corp2  <- tm_map(hiphop_corp2,removeWords,sword2)
-inspect(corp3)
 
 # 4. 명사 추출.
 
@@ -107,7 +106,7 @@ df_top10
 
 par(bg="black")
 ggplot(df_top10,aes(x='',y=Freq,fill=hiphop_final, family='baedal')) + 
-  geom_bar(width=1, stat='identity') +
+  geom_bar(width=1, stat='identity',color="black") +
   geom_text(aes(y=ypos,label=ylabel),color='black',size=5) +
   coord_polar("y",start=0) +
   ggtitle('2번 Hiphop.txt_Top10 원그래프') +
