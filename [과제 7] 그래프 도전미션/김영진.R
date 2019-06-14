@@ -265,3 +265,29 @@ ggplot(bus_melt,aes(x=버스노선번호,y=value,fill=variable)) +
                                   size = 40, 
                                   color = "black")) 
 
+### ============================================================================
+### 도전미션 3-7. 마포09번 이용현황 분석 =======================================
+### ============================================================================
+
+mapo <- read.csv('마포09번이용현황.csv')
+#mapo$no    <- c(1:length(mapo$승차인원))  
+mapo$정류소명 <- paste0(1:length(mapo$정류소명),'.',mapo$정류소명)
+mapo_melt  <- melt(mapo,id=c('정류소명')) 
+mapo_melt$정류소명 <- factor(mapo_melt$정류소명,levels=unique(mapo_melt$정류소명))
+
+
+ggplot(mapo_melt,aes(x=정류소명,y=value,fill=variable,color=variable,group=variable)) +
+  geom_line(linetype=1,size=1.5)+
+  geom_point(shape=1,size=4)+
+  geom_hline(yintercept=seq(0,40000,1000),lty='dashed',size=0.1)+
+  geom_vline(xintercept=seq(0,32,1),lty='dashed',size=0.1)+
+  labs(x='노선명',y='이용승객수(단위:천명)') +
+  theme_bw(base_family='baedal',base_size = 15) +
+  theme(axis.text.x  = element_text(angle=90, hjust=1)) +
+  ggtitle('마포09번 이용 승객수9(단위:명)_2014년 1월') +
+  theme(plot.title = element_text(family="baedal",
+                                  face = "bold",
+                                  hjust = 0.5,
+                                  vjust = 2.5,
+                                  size = 20, 
+                                  color = "black"))
